@@ -4,6 +4,8 @@ import Register from "./components/auth/register";
 import Header from "./components/header";
 import Home from "./components/home";
 
+import pgFnf from "./components/error/pgFnf";
+
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
 
