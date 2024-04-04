@@ -2,6 +2,9 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/authContext'
 import { doSignOut } from '../../firebase/auth'
+import Login from "../auth/login";
+import Register from "../auth/register";
+import Home from "../home";
 
 const Header = () => {
     const navigate = useNavigate()
@@ -12,7 +15,9 @@ const Header = () => {
                 userLoggedIn
                     ?
                     <>
+                        
                         <button onClick={() => { doSignOut().then(() => { navigate('/login') }) }} className='text-sm text-blue-600 underline'>Logout</button>
+                        <button onClick={() => { doSignOut().then(() => { navigate('/register') }) }} className='text-sm text-blue-600 underline'>Register New Account</button>
                     </>
                     :
                     <>
