@@ -1,0 +1,33 @@
+.wrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.images {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px; 
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 25px;
+    background-color: #E5E7EB;
+    gap: 10px; 
+}
+
+.navlinks {
+    font-size: 0.875rem;
+    color: #2563EB;
+    text-decoration: underline;
+    font-weight: 200;
+    gap: 10px;
+    margin-right: 10px;
+}
+
+.rightside {
+    display: flex;
+    align-items: center;
+}

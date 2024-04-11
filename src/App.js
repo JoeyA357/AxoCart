@@ -4,6 +4,8 @@ import Register from "./components/auth/register";
 import Header from "./components/header";
 import Home from "./components/home";
 
+import AddProducts from "./components/products/addProducts";
+
 import pgFnf from "./components/error/pgFnf";
 
 import { AuthProvider } from "./contexts/authContext";
@@ -27,6 +29,10 @@ function App() {
     {
       path: "/home",
       element: <Home />,
+    },
+    {
+      path: "/addProducts",
+      element: <AddProducts />,
     },
   ];
 
