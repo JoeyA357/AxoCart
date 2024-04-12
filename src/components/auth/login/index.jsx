@@ -22,19 +22,19 @@ const Login = () => {
         }
     }
 
-    const onGoogleSignIn = (e) => {
-        e.preventDefault()
-        if (!isSigningIn) {
-            setIsSigningIn(true)
-            doSignInWithGoogle().catch(err => {
-                setIsSigningIn(false)
-            })
-        }
-    }
+    // const onGoogleSignIn = (e) => {
+    //     e.preventDefault()
+    //     if (!isSigningIn) {
+    //         setIsSigningIn(true)
+    //         doSignInWithGoogle().catch(err => {
+    //             setIsSigningIn(false)
+    //         })
+    //     }
+    // }
 
     return (
         <div>
-            {userLoggedIn && (<Navigate to={'/home'} replace={true} />)}
+            {userLoggedIn && (<Navigate to={'/chat'} replace={true} />)}
 
             <main className="w-full h-screen flex self-center place-content-center place-items-center">
                 <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
@@ -90,7 +90,7 @@ const Login = () => {
                     <div className='flex flex-row text-center w-full'>
                         <div className='border-b-2 mb-2.5 mr-2 w-full'></div><div className='text-sm font-bold w-fit'>OR</div><div className='border-b-2 mb-2.5 ml-2 w-full'></div>
                     </div>
-                    <button
+                    {/* <button
                         disabled={isSigningIn}
                         onClick={(e) => { onGoogleSignIn(e) }}
                         className={`w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium  ${isSigningIn ? 'cursor-not-allowed' : 'hover:bg-gray-100 transition duration-300 active:bg-gray-100'}`}>
@@ -108,7 +108,7 @@ const Login = () => {
                             </defs>
                         </svg>
                         {isSigningIn ? 'Signing In...' : 'Continue with Google'}
-                    </button>
+                    </button> */}
                 </div>
             </main>
         </div>
