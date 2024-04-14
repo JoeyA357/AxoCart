@@ -10,6 +10,7 @@ import pgFnf from "./components/error/pgFnf";
 
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
+import { ProductsContextProvider } from "./contexts/productContext";
 
 function App() {
   
@@ -40,10 +41,12 @@ function App() {
   
 
   return (
-    <AuthProvider>
-      <Header />
-      <div className="w-full h-screen flex flex-col">{routesElement}</div>
-    </AuthProvider>
+    <ProductsContextProvider>
+      <AuthProvider>
+        <Header />
+        <div className="w-full h-screen flex flex-col">{routesElement}</div>
+      </AuthProvider>
+    </ProductsContextProvider>
   );
 
   
