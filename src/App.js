@@ -10,7 +10,10 @@ import pgFnf from "./components/error/pgFnf";
 
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
+
 import { ProductsContextProvider } from "./contexts/productContext";
+import { CartContextProvider } from "./contexts/cartContext";
+import Cart from "./components/cart/cart";
 
 function App() {
   
@@ -35,6 +38,10 @@ function App() {
       path: "/addProducts",
       element: <AddProducts />,
     },
+    {
+      path: "/cart",
+      element: <Cart />
+    }
   ];
 
   let routesElement = useRoutes(routesArray);
@@ -42,14 +49,14 @@ function App() {
 
   return (
     <ProductsContextProvider>
-      <AuthProvider>
-        <Header />
-        <div className="w-full h-screen flex flex-col">{routesElement}</div>
-      </AuthProvider>
+      <CartContextProvider>
+        <AuthProvider>
+          <Header />
+          <div className="w-full h-screen flex flex-col">{routesElement}</div>
+        </AuthProvider>
+      </CartContextProvider>
     </ProductsContextProvider>
   );
-
-  
 }
 
 export default App;

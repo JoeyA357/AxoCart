@@ -6,7 +6,8 @@
 .images {
     width: 20px;
     height: 20px;
-    margin-right: 10px; 
+    margin-right: 10px;
+    margin-left: 5px; 
 }
 
 .navbar {
@@ -19,16 +20,56 @@
 }
 
 .navlinks {
-    font-size: 0.875rem;
-    color: #2563EB;
-    text-decoration: underline;
-    font-weight: 200;
-    gap: 10px;
-    margin-right: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        outline: none;
+        border: hidden;
+        background-color: #2eca8b;
+        margin-left: 0.1px;
+        margin-right: 8px;
+}
+
+.navbar .rightside {
+    font-size: 12px;
+    font-weight: 600;
+    position: relative;
 }
 
 .rightside {
     display: flex;
+    align-items: center;
+}
+
+.navbar .rightside span {
+    margin-right: 10px;
+    
+}
+
+.navbar .rightside span .navlinks {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    margin: auto 10px;
+}
+
+.navbar .rightside .no-of-products {
+    background: #2563EB;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    position: absolute;
+    top: -4px;
+    left: 10px;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -103,3 +144,4 @@ h1 {
     margin-bottom: 2px;
     outline: none;
 }
+
