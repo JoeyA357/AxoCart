@@ -1,13 +1,7 @@
-<<<<<<< Updated upstream
 import React, { useState } from 'react';
 import { storage, db } from '../../firebase/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
-=======
-import React, {useState} from 'react'
-import { storage, db} from '../../firebase/firebase'
-import { ref } from "firebase/storage";
->>>>>>> Stashed changes
 
 const AddProducts = () => {
     const [productName, setProductName] = useState('');
@@ -67,8 +61,6 @@ const AddProducts = () => {
     // Add product from submit event
     const addProduct = async (e) => {
         e.preventDefault();
-<<<<<<< Updated upstream
-=======
         
         //storing the image
         const uploadTask = storage.ref(`product-images/${productImg.name}`).put(productImg);
@@ -93,8 +85,7 @@ const AddProducts = () => {
                 }).catch(err => setError(err.message));
             })
         })
-    }
->>>>>>> Stashed changes
+    
 
         if (!productImg) {
             setError('Please select an image');

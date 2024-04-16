@@ -11,7 +11,7 @@ import { CartContext } from '../../contexts/cartContext';
 import { Icon } from 'react-icons-kit'
 import { cart } from 'react-icons-kit/entypo/cart'
 import '../home/home.css';
-
+import { useAuth } from '../../contexts/authContext'
 
 
 const Header = () => {
