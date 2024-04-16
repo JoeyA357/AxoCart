@@ -1,5 +1,6 @@
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
+import "./style.scss";
 
 import Header from "./components/header";
 import Home from "./components/home";
@@ -8,6 +9,7 @@ import pgFnf from "./components/error/pgFnf";
 
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
+import ChatHome from "../src/components/chat/ChatHome";
 
 function App() {
   
@@ -27,6 +29,10 @@ function App() {
     {
       path: "/home",
       element: <Home />,
+    },
+    {
+      path: "/chat",
+      element: <ChatHome />,
     },
   ];
 
