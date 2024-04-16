@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./contexts/authContext";
 import { ChatContextProvider } from "./contexts/ChatContext";
 
+import 'bootstrap/dist/css/bootstrap.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
