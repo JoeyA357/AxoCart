@@ -5,6 +5,7 @@ import { ic_add } from 'react-icons-kit/md/ic_add'
 import { ic_remove } from 'react-icons-kit/md/ic_remove'
 import { iosTrashOutline } from 'react-icons-kit/ionicons/iosTrashOutline'
 import { Link } from 'react-router-dom'
+import { Cashout } from '../cashout/cashout';
 
 const Cart = () => {
     const { shoppingCart, totalPrice, totalQty, dispatch } = useContext(CartContext);
@@ -55,7 +56,7 @@ const Cart = () => {
                             <span>Total Qty</span>
                             <span>{totalQty}</span>
                         </div>
-                        <Link to='cashout' className='cashout-link'>
+                        <Link to='/cashout' className='cashout-link'>
                             <button className='btn btn-success btn-md' style={{ marginTop: 5 + 'px' }}>
                                 Cash on delivery
                             </button>

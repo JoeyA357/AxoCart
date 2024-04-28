@@ -17,6 +17,8 @@ import { ProductsContextProvider } from "./contexts/productContext";
 import { CartContextProvider } from "./contexts/cartContext";
 import Cart from "./components/cart/cart";
 
+import Cashout from "./components/cashout/cashout";
+
 function App() {
   
   const routesArray = [
@@ -46,7 +48,11 @@ function App() {
     },
     {
       path: "/cart",
-      element: <Cart />
+      element: <Cart />,
+    },
+    {
+      path: "/cashout",
+      element: <Cashout />
     }
   ];
 
