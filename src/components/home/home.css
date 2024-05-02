@@ -49,6 +49,12 @@
     
 }
 
+.navbar .rightside span .homebtn {
+    color: #000;
+    background: #000;
+    position: relative;
+}
+
 .navbar .rightside span .navlinks {
     text-decoration: none;
     color: #000;

@@ -8,7 +8,7 @@ import { setDoc, getDoc } from 'firebase/firestore';
 const Cashout = () => {
   const navigate = useNavigate();
   const { totalPrice, totalQty, dispatch } = useContext(CartContext);
-  const [name, setName] = useState('');
+  const [displayName, setName] = useState('');
   const [email, setEmail] = useState('');
   const [cell, setCell] = useState('');
   const [address, setAddress] = useState('');
@@ -21,7 +21,7 @@ const Cashout = () => {
       getDoc(docRef).then(doc => {
         if (doc.exists) {
           const data = doc.data();
-          setName(data.name || '');
+          setName(data.displayName || '');
           setEmail(data.email || '');
         }
       })
@@ -37,7 +37,7 @@ const Cashout = () => {
       const date = new Date();
       const time = date.getTime();
       await setDoc(doc(collection(db, 'Buyer-Info' + user.uid), '_' + time), {
-        BuyerName: name,
+        BuyerName: displayName,
         BuyerEmail: email,
         BuyeCell: cell,
         BuyerAddress: address,
@@ -66,7 +66,7 @@ const Cashout = () => {
         <form autoComplete="off" className='form-group' onSubmit={cashoutSubmit}>
           <label htmlFor="name">Name</label>
           <input type="text" className='form-control' required
-            value={name} disabled />
+            value={displayName} disabled />
           <br />
           <label htmlFor="email">Email</label>
           <input type="email" className='form-control' required

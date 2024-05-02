@@ -39,7 +39,7 @@ export const cartReducer = (state, action) => {
 
             case 'DEC':
                 product = action.cart;
-                if(product.qty > 1){
+                if(product.qty >= 1){
                     product.qty = product.qty - 1;
                     product.TotalProductPrice = product.qty * product.productPrice;
                     updatedPrice = totalPrice - product.productPrice;

@@ -10,6 +10,7 @@ import ProfileLogo from "../assets/profilelogo.png";
 import { CartContext } from '../../contexts/cartContext';
 import { Icon } from 'react-icons-kit'
 import { cart } from 'react-icons-kit/entypo/cart'
+import { home } from 'react-icons-kit/icomoon/home'
 import '../home/home.css';
 import { useAuth } from '../../contexts/authContext'
 
@@ -27,8 +28,11 @@ const Header = () => {
                     <div className="leftside"></div>
                     <div className='rightside'>
                        <span><Link to="/cart" classname='navlinks'><Icon icon={cart} /></Link></span>
-                            <span className='no-of-products'>{totalQty}</span>                     
+                            <span className='no-of-products'>{totalQty}</span>
+                            <span><Link to="/home" classname='homebtn'><Icon size={20} icon={home} /></Link></span>
                         <img src={ProfileLogo} className="images" alt="Profile Logo" />
+                        <button onClick={() => { navigate('/addProducts') }} className='navlinks'>Add Product</button>
+                        <button onClick={() => { navigate('/chat') }} className='navlinks'>Chat</button>
                         <button onClick={() => { doSignOut().then(() => { navigate('/login') }) }} className='navlinks'>Logout</button>
                     </div>
                 </div>
