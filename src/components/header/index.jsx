@@ -19,18 +19,21 @@ const Header = () => {
     const navigate = useNavigate()
 
     const {totalQty} = useContext(CartContext)
-
+    const {currentUser} = useContext(AuthContext)
     const { userLoggedIn } = useAuth()
     return (
         userLoggedIn ? (
             <>
                 <div className="navbar">
-                    <div className="leftside"></div>
+                    <div className="leftside">
+                        <img src={currentUser.photoURL} className="pfp" alt="Profile Logo" />
+                    </div>    
+                    <div className='middleside'></div>
                     <div className='rightside'>
                        <span><Link to="/cart" classname='navlinks'><Icon icon={cart} /></Link></span>
                             <span className='no-of-products'>{totalQty}</span>
                             <span><Link to="/home" classname='homebtn'><Icon size={20} icon={home} /></Link></span>
-                        <img src={ProfileLogo} className="images" alt="Profile Logo" />
+                        
                         <button onClick={() => { navigate('/addProducts') }} className='navlinks'>Add Product</button>
                         <button onClick={() => { navigate('/chat') }} className='navlinks'>Chat</button>
                         <button onClick={() => { doSignOut().then(() => { navigate('/login') }) }} className='navlinks'>Logout</button>

@@ -9,6 +9,14 @@
     margin-right: 10px;
     margin-left: 5px; 
 }
+.pfp {
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-left: 5px; 
+    border-radius: 50%;
+}
 
 .navbar {
     display: flex;
@@ -42,6 +50,22 @@
 .rightside {
     display: flex;
     align-items: center;
+}
+
+.navbar .leftside {
+    font-size: 12px;
+    font-weight: 600;
+    position: relative;
+}
+
+.leftside {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .leftside img .pfp {
+    width: 15px;
+    height: 10px;
 }
 
 .navbar .rightside span {
