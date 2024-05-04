@@ -33,8 +33,8 @@ const SearchProducts = () => {
   const handleSearch = async () => {
     const q = query(
       collection(db, "Products"),
-      where('productName', '>=', productName.toLowerCase()),
-      where('productName', '<=', productName.toLowerCase() + '\uf8ff')
+      where('productName', '>=', productName),
+      where('productName', '<=', productName + '\uf8ff')
     );
 
     try {
@@ -43,6 +43,7 @@ const SearchProducts = () => {
       querySnapshot.forEach((doc) => {
         productsData.push(doc.data());
       });
+      console.log(productsData);
       setProducts(productsData);
     } catch (err) {
       setErr(true);
@@ -65,6 +66,7 @@ const SearchProducts = () => {
           value={productName}
         />
       </div>
+      <div className='products-container'>
       {err && <span>Item not found!</span>}
       
     
@@ -93,6 +95,7 @@ const SearchProducts = () => {
                         <button className='addcart-btn' onClick={() => {dispatch({type: 'ADD_TO_CART', id: product.productID, product})}}>ADD TO CART</button>
                         </div>
                          ))}
+                         </div>
                          </div>
 
   );
