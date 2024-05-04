@@ -16,7 +16,7 @@ import ChatHome from "../src/components/chat/ChatHome";
 import { ProductsContextProvider } from "./contexts/productContext";
 import { CartContextProvider } from "./contexts/cartContext";
 import Cart from "./components/cart/cart";
-
+import SearchProducts from "./components/products/SearchProducts";
 import Cashout from "./components/cashout/cashout";
 
 function App() {
@@ -53,6 +53,10 @@ function App() {
     {
       path: "/cashout",
       element: <Cashout />
+    },
+    {
+      path: "/searchProducts",
+      element: <SearchProducts />
     }
   ];
 
