@@ -2,12 +2,34 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import { ProductsContext } from '../../contexts/productContext';
 import { CartContext } from '../../contexts/cartContext';
+import { AuthContext } from '../../contexts/authContext';
+import { useEffect } from 'react';
+import { useAuth } from '../../contexts/authContext';
+import { db } from '../../firebase/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Products = () => {
 
   const [productName, setProductName] = useState("");
   
   const { products } = useContext(ProductsContext);
+  const { currentUser } = useContext(AuthContext);
+  const { userLoggedIn } = useAuth();
+  const [user, setUser] = useState(null);
+
+
+  // Fetch user data and query them later on
+  useEffect(() => {
+    if (currentUser) {
+      const fetchUser = async () => {
+        const userRef = doc(db, 'users', currentUser.uid);
+        const userDoc = await getDoc(userRef);
+        setUser(userDoc.data());
+      };
+      fetchUser();
+    }
+  }, [currentUser]);
+
   //console.log(products);
 
   //const data = useContext(CartContext);
@@ -15,6 +37,14 @@ const Products = () => {
   const navigate = useNavigate()
   
   const {dispatch} = useContext(CartContext);
+
+  const addToCart = (product) => {
+    if (user && user.userType === 'seller') {
+      alert('Only Customers can purchase products');
+    } else {
+      dispatch({type: 'ADD_TO_CART', id: product.productID, product})
+    }
+  }
 
   return (
     <>
@@ -32,8 +62,8 @@ const Products = () => {
                         </div>
                         <div className='product-price'>
                             $ {product.productPrice}.00
-                    </div>
-                        <button className='addcart-btn' onClick={() => {dispatch({type: 'ADD_TO_CART', id: product.productID, product})}}>ADD TO CART</button>
+                        </div>
+                        <button className='addcart-btn' onClick={() => {addToCart(product)}}>ADD TO CART</button>
                         </div>
                          ))}
                         </div>                                    </>

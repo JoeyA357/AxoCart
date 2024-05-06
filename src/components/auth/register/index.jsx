@@ -11,6 +11,7 @@ import { doc, setDoc } from "firebase/firestore";
 const Register = () => {
     const [err, setErr] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [userType, setUserType] = useState('');
     //const [isRegistering, setIsRegistering] = useState(false)
 
     const navigate = useNavigate();
@@ -21,10 +22,11 @@ const Register = () => {
       const displayName = e.target[0].value;
       const email = e.target[1].value;
       const password = e.target[2].value;
-      const file = e.target[3].files[0];
+      const file = e.target[4].files[0];
 
     try {
         //Create user
+        setLoading(true);
         const res = await createUserWithEmailAndPassword(auth, email, password);
         
         //Create a unique image name
@@ -60,6 +62,7 @@ const Register = () => {
                 displayName,
                 email,
                 photoURL: downloadURL,
+                userType,
               });
   
               //create empty user chats on firestore
@@ -76,6 +79,10 @@ const Register = () => {
         setErr(true);
         setLoading(false);
       }
+    };
+
+    const handleUserTypeChange = (e) => {
+      setUserType(e.target.value);
     };
     
 
@@ -188,28 +195,36 @@ const Register = () => {
     //     </>
     // )
     return (
-        <div className="formContainer">
-          <div className="formWrapper">
-            <span className="title">Register</span>
-            <form onSubmit={onSubmit}>
-              <input required type="text" placeholder="display name" />
-              <input required type="email" placeholder="email" />
-              <input required type="password" placeholder="password" />
-              <input required style={{ display: "none" }} type="file" id="file" />
-              <label htmlFor="file">
-                <img src={Add} alt="" />
-                <span>Add an avatar</span>
-              </label>
-              <button disabled={loading}>Sign up</button>
-              {loading && "Uploading and compressing the image please wait..."}
-              {err && <span>Something went wrong</span>}
-            </form>
-            <p>
-              You do have an account? <Link to="/register">Login</Link>
-            </p>
-          </div>
+      <div className="formContainer">
+        <div className="formWrapper">
+          <h3 className="text-gray-800 text-xl font-semibold sm:text-2xl">Register New Account</h3>
+          <form onSubmit={onSubmit}>
+            <label className="text-sm text-gray-600 font-bold">Display Name</label>
+            <input required type="text" placeholder="display name..." className="w-full px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"/>
+            <label className="text-sm text-gray-600 font-bold">Email</label>
+            <input required type="email" placeholder="email..." className="w-full px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"/>
+            <label className="text-sm text-gray-600 font-bold">Password</label>
+            <input required type="password" placeholder="password..." className="w-full px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"/>
+            <select required value={userType} onChange={handleUserTypeChange}>
+              <option value="">Customer or Seller?</option>
+              <option value="customer">Customer</option>
+              <option value="seller">Seller</option>
+            </select>
+            <input required style={{ display: "none" }} type="file" id="file" />
+            <label htmlFor="file">
+              <img src={Add} alt="" />
+              <span>Add an avatar</span>
+            </label>
+            <button disabled={loading}>Sign up</button>
+            {loading && "Uploading and compressing the image please wait..."}
+            {err && <span>Something went wrong</span>}
+          </form>
+          <p>
+            You do have an account? <Link to="/register">Login</Link>
+          </p>
         </div>
-      );
-}
-
-export default Register
+      </div>
+    );
+  };
+  
+  export default Register;

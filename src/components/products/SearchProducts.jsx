@@ -12,21 +12,40 @@ import {
     where,
     orderBy,
     limit,
+    getDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/firebase.js";
 import { ProductsContext } from '../../contexts/productContext.jsx';
 import { CartContext } from '../../contexts/cartContext.jsx';
+import { AuthContext } from '../../contexts/authContext';
+import { useAuth } from '../../contexts/authContext';
 
 const SearchProducts = () => {
 
-    const colletionRef = collection(db, 'Products');
-    const {dispatch} = useContext(CartContext);
+  const colletionRef = collection(db, 'Products');
+  const {dispatch} = useContext(CartContext);
+  const { currentUser } = useContext(AuthContext);
+  const { userLoggedIn } = useAuth();
+  const [user, setUser] = useState(null);
 
   const [productName, setProductName] = useState("");
   const [loading, setLoading] = useState(false);
   const [product, setProducts] = useState([]);
   const [err, setErr] = useState(false);
   const { products } = useContext(ProductsContext);
+
+  // Fetch user data and query them later on
+  useEffect(() => {
+    if (currentUser) {
+      const fetchUser = async () => {
+        const userRef = doc(db, 'users', currentUser.uid);
+        const userDoc = await getDoc(userRef);
+        setUser(userDoc.data());
+      };
+      fetchUser();
+    }
+  }, [currentUser]);
+
   //console.log(products);
 
   //const data = useContext(CartContext);
@@ -54,6 +73,15 @@ const SearchProducts = () => {
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
   };
+
+  const addToCart = (product) => {
+    if (user && user.userType === 'seller') {
+      alert('Only Customers can purchase products');
+    } else {
+      dispatch({type: 'ADD_TO_CART', id: product.productID, product})
+    }
+  }
+
   return (
     
       <div className="search">
@@ -80,6 +108,8 @@ const SearchProducts = () => {
         <textarea value={desc} onChange={(e) => setDesc(e.target.value)} />
         <button onClick={() => addSchool()}>Submit</button> */}
 
+
+
       {loading ? <h1>Loading...</h1> : null}
       {product.map ((prod)=> (
                     <div className='product-card' key={product.productID}>
@@ -92,7 +122,7 @@ const SearchProducts = () => {
                         <div className='product-price'>
                             $ {prod.productPrice}.00
                     </div>
-                        <button className='addcart-btn' onClick={() => {dispatch({type: 'ADD_TO_CART', id: product.productID, product})}}>ADD TO CART</button>
+                      <button className='addcart-btn' onClick={() => {addToCart(product)}}>ADD TO CART</button>
                         </div>
                          ))}
                          </div>
