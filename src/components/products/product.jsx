@@ -106,7 +106,10 @@ const Product = () => {
             <div className='product-img1'>
               <img src={product.productImg} alt="not found" />
             </div>
-            <div className="Description">Loren Ipsum</div>
+            <div >
+              <h2 className="Dectit">Description</h2>
+              <div className="Description">{product.productDescription}</div>
+            </div>
             <div className='product-price1'>
               $ {product.productPrice}.00
             </div>

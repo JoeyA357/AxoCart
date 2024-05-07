@@ -61,6 +61,7 @@ const addToCart = (product) => {
 
 
   const productInfo = (product) => {
+    console.log(product.productID)
     setProd(product.productID);
     navigate('/product');
   }
