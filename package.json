@@ -10,6 +10,7 @@
     "firebase": "^10.11.0",
     "firestore": "^1.1.6",
     "get-google-fonts": "^1.2.2",
+    "props": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons-kit": "^2.0.0",

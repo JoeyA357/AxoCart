@@ -8,6 +8,7 @@ import { db } from '../../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import AxocartLogo from '../assets/AxoCartLogoBack.png';
 import AxocartLogo2 from '../assets/AxoCart_Logo.png';
+import { ProductInfoContext } from "../../contexts/ProductInfoContext";
 
 const Products = () => {
     const [productName, setProductName] = useState("");
@@ -16,11 +17,13 @@ const Products = () => {
     const { userLoggedIn } = useAuth();
     const [user, setUser] = useState(null);
     const [currentSlide, setCurrentSlide] = useState(0);
+    const { prod,setProd } = useContext(ProductInfoContext); 
     const images = [
         AxocartLogo,  // Replace with actual URLs
         AxocartLogo2,
         AxocartLogo
     ];
+
 
     useEffect(() => {
         if (currentUser) {
@@ -35,7 +38,6 @@ const Products = () => {
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % images.length);
         }, 3000); // Change slide every 3 seconds
-
         return () => clearInterval(interval); // Cleanup the interval on component unmount
     }, [currentUser, images.length]);
 
@@ -49,6 +51,10 @@ const Products = () => {
             dispatch({ type: 'ADD_TO_CART', id: product.productID, product });
         }
     };
+    const productInfo = (product) => {
+      setProd(product.productID);
+      navigate('/product');
+    }
 
     return (
         <>
@@ -64,7 +70,7 @@ const Products = () => {
                 {products.map(product => (
                     <div className='product-card' key={product.productID}>
                         <div className='product-img'>
-                            <img src={product.productImg} alt="not found" />
+                            <img src={product.productImg} onClick={() => {productInfo(product)}} alt="not found" />
                         </div>
                         <div className='product-name'>
                             {product.productName}
