@@ -70,7 +70,7 @@ const Products = () => {
                             $ {product.productPrice}.00
                         </div>
 
-                        <button className='addcart-btn' onClick={() => {productInfo(product)}}>Info</button>
+                        
                         <button className='addcart-btn' onClick={() => {addToCart(product)}}>ADD TO CART</button>
                         </div>
                          ))}
