@@ -37,6 +37,7 @@ const Header = () => {
       <>
         <div className="navbar">
           <div className="leftside">
+            <p>AxoCart</p>
           <img src={AxoCartLogo} className="pfp" alt="AxoCart" />
             <img src={user?.photoURL} className="pfp" alt="Profile Logo" />
           </div>

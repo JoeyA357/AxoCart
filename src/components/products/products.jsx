@@ -10,6 +10,9 @@ import { doc, getDoc } from 'firebase/firestore';
 import { ProductInfoContext } from "../../contexts/ProductInfoContext";
 import AxocartLogo from '../assets/AxoCartLogoBack.png';
 import AxocartLogo2 from '../assets/AxoCart_Logo.png';
+import Slider1 from '../assets/slider1_bag.jpg';
+import Slider2 from '../assets/Slider2_necklace (1).jpg';
+import Slider3 from '../assets/Slider3_shirt (1).jpg';
 
 const Products = () => {
 
@@ -22,9 +25,9 @@ const Products = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { prod,setProd } = useContext(ProductInfoContext); 
   const images = [
-    AxocartLogo,  // Replace with actual URLs
-    AxocartLogo2,
-    AxocartLogo
+    Slider1,  // Replace with actual URLs
+    Slider2,
+    Slider3
 ];
 
   // Fetch user data and query them later on
