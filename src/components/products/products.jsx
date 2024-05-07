@@ -74,7 +74,11 @@ const addToCart = (product) => {
                 <button className="slide-arrow right-arrow" onClick={() => setCurrentSlide((currentSlide + 1) % images.length)}>&raquo;</button>
             </div>
             {products.length !== 0 && <h1 style={{ textAlign: 'center' }}>Products</h1>}
-            <button onClick={() => { navigate('/searchProducts') }} className='navlinks'>Search Product</button>
+            <div class="container">
+                <div class="center">
+            <button onClick={() => { navigate('/searchProducts') }} className='searchlinks'>Search Product</button>
+            </div>
+            </div>
             <div className='products-container'>
                 {products.length === 0 && <div>slow internet...no products to display</div>}
                 {products.map(product => (
