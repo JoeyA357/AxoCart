@@ -22,9 +22,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 7px 25px;
+    padding: 0px 25px;
     background-color: #E5E7EB;
     gap: 10px; 
+    border-radius: 15px;
+    position: fixed;
+    width: 98%;
+    height: 60px;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+
 }
 
 .navlinks {
@@ -79,6 +87,7 @@
     position: relative;
 }
 
+
 .navbar .rightside span .navlinks {
     text-decoration: none;
     color: #000;
@@ -104,6 +113,48 @@
 }
 
 /* products */
+
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    overflow: hidden; /* Ensures the container does not resize */
+}
+
+.slider img {
+    width: 100%;
+    display: block; /* Remove default image margin */
+    object-fit: cover; /* Ensures images cover the area properly */
+    height: 300px; /* Fix height to stabilize slider height */
+}
+
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.slide-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
 
 h1 {
     padding: 30px;

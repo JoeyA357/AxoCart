@@ -10,6 +10,7 @@ import '../home/home.css';
 import { useAuth } from '../../contexts/authContext';
 import { db } from '../../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import AxoCartLogo from '../assets/AxoCartLogoBack.png';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const Header = () => {
       <>
         <div className="navbar">
           <div className="leftside">
+          <img src={AxoCartLogo} className="pfp" alt="AxoCart" />
             <img src={user?.photoURL} className="pfp" alt="Profile Logo" />
           </div>
           <div className='middleside'></div>
@@ -49,18 +51,13 @@ const Header = () => {
               }} classname='navlinks'><Icon icon={cart} /></button></span>
             <span className='no-of-products'>{totalQty}</span>
             <span><Link to="/home" classname='homebtn'><Icon size={20} icon={home} /></Link></span>
-            <button
-              onClick={() => {
+            <button onClick={() => {
                 if (user && user.userType === 'customer') {
                   alert('Only Sellers can add products to the website');
                 } else {
                   navigate('/addProducts');
                 }
-              }}
-              className='navlinks'
-            >
-              Add Product
-            </button>
+              }} className='navlinks'>Add Product</button>
             <button onClick={() => { navigate('/chat') }} className='navlinks'>Chat</button>
             <button onClick={() => { doSignOut().then(() => { navigate('/login') }) }} className='navlinks'>Logout</button>
           </div>
