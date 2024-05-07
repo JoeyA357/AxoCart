@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useAuth } from '../../contexts/authContext';
 import { db } from '../../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { ProductInfoContext } from "../../contexts/ProductInfoContext";
 
 const Products = () => {
 
@@ -16,7 +17,7 @@ const Products = () => {
   const { currentUser } = useContext(AuthContext);
   const { userLoggedIn } = useAuth();
   const [user, setUser] = useState(null);
-
+  const { prod,setProd } = useContext(ProductInfoContext); 
 
   // Fetch user data and query them later on
   useEffect(() => {
@@ -46,6 +47,11 @@ const Products = () => {
     }
   }
 
+  const productInfo = (product) => {
+    setProd(product.productID);
+    navigate('/product');
+  }
+
   return (
     <>
             {products.length !== 0 && <h1>Products</h1>}
@@ -55,7 +61,7 @@ const Products = () => {
                 {products.map(product => (
                     <div className='product-card' key={product.productID}>
                         <div className='product-img'>
-                            <img src={product.productImg} alt="not found" />
+                            <img src={product.productImg} onClick={() => {productInfo(product)}} alt="not found" />
                         </div>
                         <div className='product-name'>
                             {product.productName}
@@ -63,6 +69,8 @@ const Products = () => {
                         <div className='product-price'>
                             $ {product.productPrice}.00
                         </div>
+
+                        <button className='addcart-btn' onClick={() => {productInfo(product)}}>Info</button>
                         <button className='addcart-btn' onClick={() => {addToCart(product)}}>ADD TO CART</button>
                         </div>
                          ))}

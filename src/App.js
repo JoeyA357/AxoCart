@@ -13,11 +13,13 @@ import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
 import ChatHome from "../src/components/chat/ChatHome";
 
+import { ProductInfoContext, ProductInfoContextProvider } from "./contexts/ProductInfoContext";
 import { ProductsContextProvider } from "./contexts/productContext";
 import { CartContextProvider } from "./contexts/cartContext";
 import Cart from "./components/cart/cart";
 import SearchProducts from "./components/products/SearchProducts";
 import Cashout from "./components/cashout/cashout";
+import Product from "./components/products/product";
 
 function App() {
   
@@ -57,6 +59,10 @@ function App() {
     {
       path: "/searchProducts",
       element: <SearchProducts />
+    },
+    {
+      path: "/Product",
+      element: <Product />
     }
   ];
 
@@ -65,12 +71,14 @@ function App() {
 
   return (
     <ProductsContextProvider>
-      <CartContextProvider>
-        <AuthProvider>
-          <Header />
-          <div className="w-full h-screen flex flex-col">{routesElement}</div>
-        </AuthProvider>
-      </CartContextProvider>
+      <ProductInfoContextProvider>
+        <CartContextProvider>
+          <AuthProvider>
+            <Header />
+            <div className="w-full h-screen flex flex-col">{routesElement}</div>
+          </AuthProvider>
+        </CartContextProvider>
+      </ProductInfoContextProvider>
     </ProductsContextProvider>
   );
 }
