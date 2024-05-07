@@ -104,6 +104,7 @@ const SearchProducts = () => {
       <div className="searchForm">
         <input
           type="text"
+          className= "search-bar"
           placeholder="Find an Item"
           onKeyDown={handleKey}
           onChange={(e) => setProductName(e.target.value)}

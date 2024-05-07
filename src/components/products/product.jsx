@@ -1,126 +1,58 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom'
-import { ProductsContext } from '../../contexts/productContext';
-import { CartContext } from '../../contexts/cartContext';
-import { AuthContext } from '../../contexts/authContext';
-import { useEffect } from 'react';
-import { useAuth } from '../../contexts/authContext';
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import { doc, getDoc } from "firebase/firestore";
 import { db } from '../../firebase/firebase';
-import { ProductInfoContext } from "../../contexts/ProductInfoContext";
-import {
-  doc,
-  onSnapshot,
-  updateDoc,
-  setDoc,
-  deleteDoc,
-  collection,
-  serverTimestamp,
-  getDocs,
-  query,
-  where,
-  orderBy,
-  limit,
-  getDoc,
-} from "firebase/firestore";
+import { ProductsContext } from '../../contexts/productContext.jsx';
+import { CartContext } from '../../contexts/cartContext.jsx';
+import { AuthContext } from '../../contexts/authContext';
+import { ProductInfoContext } from '../../contexts/ProductInfoContext.jsx';
 
 const Product = () => {
-  const [err, setErr] = useState(false);
-  const [productName, setProductName] = useState("");
-  const [product, setProducts] = useState(null);
-  const { products } = useContext(ProductsContext);
+  const [product, setProduct] = useState(null);
+  const { prod } = useContext(ProductInfoContext);
   const { currentUser } = useContext(AuthContext);
-  const { userLoggedIn } = useAuth();
-  const [user, setUser] = useState(null);
-  const  {prod} = useContext(ProductInfoContext); 
-  const productID = prod;
-  console.log(productID+" created")
+  const { dispatch } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProduct = async () => {
       if (prod) {
-        // const q = query(
-        //   collection(db, "Products"),
-        //   where(firebase.firestore.FieldPath.documentId(), '==', prod)
-        // );
-  
-        // try {
-        //   const querySnapshot = await getDocs(q);
-        //   const productsData = [];
-        //   querySnapshot.forEach((doc) => {
-        //     productsData.push(doc.data());
-        //   });
-        //   console.log(productsData);
-        //   setProducts(productsData[0]); // Assuming there's only one matching product
-        // } catch (err) {
-        //   setErr(true);
-        // }
         const docRef = doc(db, "Products", prod);
         const docSnap = await getDoc(docRef);
-        setProducts(docSnap.data());
         if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
+          setProduct(docSnap.data());
         } else {
-          // docSnap.data() will be undefined in this case
-          console.log("No such document!");
+          console.log("No such product!");
         }
       }
     };
-  
-    fetchData(); // Call the async function immediately
+    fetchProduct();
   }, [prod]);
-  
-
-  // Fetch user data and query them later on
-  useEffect(() => {
-    if (currentUser) {
-      const fetchUser = async () => {
-        const userRef = doc(db, 'users', currentUser.uid);
-        const userDoc = await getDoc(userRef);
-        setUser(userDoc.data());
-      };
-      fetchUser();
-    }
-  }, [currentUser]);
-
-  //console.log(products);
-
-  //const data = useContext(CartContext);
-  //console.log(data);
-  const navigate = useNavigate()
-  
-  const {dispatch} = useContext(CartContext);
 
   const addToCart = (product) => {
-    if (user && user.userType === 'seller') {
+    if (currentUser?.userType === 'seller') {
       alert('Only Customers can purchase products');
     } else {
-      dispatch({type: 'ADD_TO_CART', id: product.productID, product})
+      dispatch({ type: 'ADD_TO_CART', id: product.productID, product });
     }
-  }
+  };
+
+  if (!product) return <div>Loading...</div>;
 
   return (
-    <>
-      {product && (
-        <div className='products-container1'>
-            <h1 className='product-name1'>{product.productName}</h1>
-            <div className='product-img1'>
-              <img src={product.productImg} alt="not found" />
-            </div>
-            <div >
-              <h2 className="Dectit">Description</h2>
-              <div className="Description">{product.productDescription}</div>
-            </div>
-            <div className='product-price1'>
-              $ {product.productPrice}.00
-            </div>
-            <button className='addcart-btn1' onClick={() => {addToCart(product)}}>ADD TO CART</button>
-          
+      <div className="product-container2">
+        <div className="product-image2">
+          <img src={product.productImg} alt={`${product.productName}`} />
         </div>
-      )}
-    </>
-  );
-  
+        <div className="product-details2">
+          <h1 className="product-name2">{product.productName}</h1>
+          <h2>Description</h2>
+          <p className="product-description2">{product.productDescription}</p>
+          <p className="product-price2">Price: ${product.productPrice}.00</p>
+          <button className="btn-add-to-cart2" onClick={() => addToCart(product)}>Add to Cart</button>
+        </div>
+      </div>
+    );
+  };
 
-}
-            
-         export default Product;
+export default Product;
