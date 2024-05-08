@@ -31,7 +31,7 @@
     align-items: center;
 
     .logo {
-      color: #5d5b8d;
+      color: #170ffb;
       font-weight: bold;
       font-size: 24px;
 
@@ -58,7 +58,7 @@
       }
 
       button {
-        background-color: #7b96ec;
+        background-color: #003cff;
         color: white;
         padding: 10px;
         font-weight: bold;
@@ -88,7 +88,7 @@
 }
 
 .home {
-  background-color: #a7bcff;
+  background-color: #8075d6;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -282,6 +282,7 @@
       }
 
       .input {
+        border: 1px #2f2d52;
         height: 50px;
         background-color: white;
         padding: 10px;
@@ -291,7 +292,7 @@
 
         input {
           width: 100%;
-          border: none;
+          border: blue;
           outline: none;
           color: #2f2d52;
           font-size: 18px;
@@ -305,7 +306,7 @@
           display: flex;
           align-items: center;
           gap: 10px;
-
+          
           img {
             height: 24px;
             cursor: pointer;
@@ -315,7 +316,7 @@
             border: none;
             padding: 10px 15px;
             color: white;
-            background-color: #8da4f1;
+            background-color: #003cff;
             cursor: pointer;
           }
         }
