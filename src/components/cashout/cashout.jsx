@@ -3,16 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import { collection, doc } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebase';
 import { CartContext } from '../../contexts/cartContext';
-import { setDoc, getDoc } from 'firebase/firestore';
+import { setDoc, getDoc, deleteDocdoc,
+  onSnapshot,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  limit,
+ } from 'firebase/firestore';
+
 
 const Cashout = () => {
   const navigate = useNavigate();
-  const { totalPrice, totalQty, dispatch } = useContext(CartContext);
+  const { shoppingCart, totalPrice, totalQty, dispatch } = useContext(CartContext);
   const [displayName, setName] = useState('');
   const [email, setEmail] = useState('');
   const [cell, setCell] = useState('');
   const [address, setAddress] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  const [product, setProducts] = useState([]);
+  const [err, setErr] = useState(false);
   const user = auth.currentUser;
 
   useEffect(() => {
@@ -33,10 +46,31 @@ const Cashout = () => {
   const cashoutSubmit = async (e) => {
     e.preventDefault();
 
-    if (user) {
+     if (user) {
+       let count=0
+       while(count<shoppingCart.length) {
+    //     const q = query(
+    //       collection(db, "Products"),
+    //       where('productID', '==', "MuVmSRjv9vuTE6400oAQ"),
+    //     );
+    
+    //     try {
+    //       const querySnapshot = await getDocs(q);
+    //       const productsData = [];
+    //       querySnapshot.forEach((doc) => {
+    //         productsData.push(doc.data());
+    //       });
+    //       setProducts(productsData);
+    //     } catch (err) {
+    //       setErr(true);
+    //     }
+    //     console.log(product)
       const date = new Date();
       const time = date.getTime();
-      await setDoc(doc(collection(db, 'Buyer-Info' + user.uid), '_' + time), {
+      console.log(shoppingCart)
+      await setDoc(doc(db, 'Buyer-Info','Buyer-Info' + user.uid+ '_' + time), {
+        //SellerName: product.productSeller,
+        productID: shoppingCart[count].productID,
         BuyerName: displayName,
         BuyerEmail: email,
         BuyeCell: cell,
@@ -44,6 +78,13 @@ const Cashout = () => {
         BayerPayment: totalPrice,
         BuyerQuantity: totalQty
       });
+      console.log(count)
+      await deleteDoc(doc(db, "Products", shoppingCart[count].productID));
+      
+      count=count+1;
+    }
+
+    
 
       setCell('');
       setAddress('');

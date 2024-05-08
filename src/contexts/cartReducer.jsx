@@ -25,34 +25,35 @@ export const cartReducer = (state, action) => {
         }
         break;
 
-        case 'INC':
-            product= action.cart;
-            product.qty = product.qty + 1;
-            product.TotalProductPrice = product.qty * product.productPrice;
-            updatedQty = totalQty + 1;
-            updatedPrice = totalPrice + product.productPrice;
-            index = shoppingCart.findIndex(cart => cart.productID === action.id);
-            shoppingCart[index] = product;
-            return {
-                shoppingCart: [...shoppingCart], totalPrice: updatedPrice, totalQty: updatedQty
-            };
+        // case 'INC':
+            
+        //     product= action.cart;
+        //     product.qty = product.qty + 1;
+        //     product.TotalProductPrice = product.qty * product.productPrice;
+        //     updatedQty = totalQty + 1;
+        //     updatedPrice = totalPrice + product.productPrice;
+        //     index = shoppingCart.findIndex(cart => cart.productID === action.id);
+        //     shoppingCart[index] = product;
+        //     return {
+        //         shoppingCart: [...shoppingCart], totalPrice: updatedPrice, totalQty: updatedQty
+        //     };
 
-            case 'DEC':
-                product = action.cart;
-                if(product.qty >= 1){
-                    product.qty = product.qty - 1;
-                    product.TotalProductPrice = product.qty * product.productPrice;
-                    updatedPrice = totalPrice - product.productPrice;
-                    updatedQty = totalQty - 1;
-                    index = shoppingCart.findIndex(cart => cart.productID === action.id);
-                    shoppingCart[index] = product;
-                    return {
-                        shoppingCart: [...shoppingCart], totalPrice: updatedPrice, totalQty: updatedQty
-                    };
-                }else{
-                        return state;
-                    }
-                    break;
+        //     case 'DEC':
+        //         product = action.cart;
+        //         if(product.qty >= 1){
+        //             product.qty = product.qty - 1;
+        //             product.TotalProductPrice = product.qty * product.productPrice;
+        //             updatedPrice = totalPrice - product.productPrice;
+        //             updatedQty = totalQty - 1;
+        //             index = shoppingCart.findIndex(cart => cart.productID === action.id);
+        //             shoppingCart[index] = product;
+        //             return {
+        //                 shoppingCart: [...shoppingCart], totalPrice: updatedPrice, totalQty: updatedQty
+        //             };
+        //         }else{
+        //                 return state;
+        //             }
+        //             break;
 
                     case 'DELETE':
                         const filtered = shoppingCart.filter(product => product.productID !== action.id);

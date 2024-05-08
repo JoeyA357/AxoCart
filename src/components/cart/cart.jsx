@@ -10,7 +10,7 @@ import { Cashout } from '../cashout/cashout';
 const Cart = () => {
     const { shoppingCart, totalPrice, totalQty, dispatch } = useContext(CartContext);
 
-    
+    console.log(shoppingCart)
     return (
         <>
             {shoppingCart.length !== 0 && <h1>Cart</h1>}
@@ -28,13 +28,13 @@ const Cart = () => {
                         </div>
                         <div className='cart-name'>{cart.productName}</div>
                         <div className='cart-price-orignal'>$ {cart.productPrice}.00</div>
-                        <div className='inc' onClick={() => dispatch({ type: 'INC', id: cart.productID, cart })}>
+                        {/* <div className='inc' onClick={() => dispatch({ type: 'INC', id: cart.productID, cart })}>
                             <Icon icon={ic_add} size={24} />
-                        </div>
+                        </div> */}
                         <div className='quantity'>{cart.qty}</div>
-                        <div className='dec' onClick={() => dispatch({ type: 'DEC', id: cart.productID, cart })}>
+                        {/* <div className='dec' onClick={() => dispatch({ type: 'DEC', id: cart.productID, cart })}>
                             <Icon icon={ic_remove} size={24} />
-                        </div>
+                        </div> */}
                         <div className='cart-price'>
                             $ {cart.TotalProductPrice}.00
                         </div>

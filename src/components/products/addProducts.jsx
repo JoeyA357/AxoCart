@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { storage, db } from '../../firebase/firebase';
+import { auth,storage, db } from '../../firebase/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 
@@ -9,6 +9,7 @@ const AddProducts = () => {
     const [productImg, setProductImg] = useState(null);
     const [productDescription, setProductDescription] = useState('');
     const [error, setError] = useState('');
+    const user = auth.currentUser;
 
     const types = ['image/png', 'image/jpeg']; // image types
 
@@ -26,6 +27,7 @@ const AddProducts = () => {
     const addProductToFirestore = async (url) => {
         try {
             await addDoc(collection(db, 'Products'), {
+                productSeller: user.uid,
                 productImg: url,
                 productName: productName,
                 productPrice: Number(productPrice),
